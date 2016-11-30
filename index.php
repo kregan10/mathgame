@@ -1,5 +1,22 @@
 <?php session_start();
 
+    $didLogIn = isset($_POST['email']) && isset($_POST['password']);
+
+
+    if($didLogIn)
+    {
+      $_SESSION['email'] = $_POST['email'];
+    }
+
+    $isLoggedIn = isset($_SESSION['email']);
+
+    if(!$isLoggedIn)
+    {
+      $url = "http://$_SERVER[HTTP_HOST]/login.php";
+      header("Location: $url");
+      exit;
+    }
+
     if(!isset($_SESSION['score']))
     {
       $_SESSION['score'] = 0;
